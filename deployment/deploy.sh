@@ -61,7 +61,7 @@ echo -e "${YELLOW}[6/8] Setting up project directory...${NC}"
 # Setup virtual environment for backend
 echo ""
 echo -e "${YELLOW}[7/8] Setting up Python virtual environment...${NC}"
-cd $PROJECT_DIR/backend
+cd /home/ubuntu/CC_miniproject/backend
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
