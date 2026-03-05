@@ -29,18 +29,8 @@ sudo apt-get install -y python3 python3-pip python3-venv
 
 # Install MongoDB
 echo ""
-echo -e "${YELLOW}[3/8] Installing MongoDB...${NC}"
-if ! command -v mongod &> /dev/null; then
-    wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
-    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
-    sudo apt-get update
-    sudo apt-get install -y mongodb-org
-    sudo systemctl start mongod
-    sudo systemctl enable mongod
-    echo -e "${GREEN}✓ MongoDB installed and started${NC}"
-else
-    echo -e "${GREEN}✓ MongoDB already installed${NC}"
-fi
+echo -e "${YELLOW}[3/8] Installed MongoDB...${NC}"
+
 
 # Install Nginx
 echo ""
@@ -66,16 +56,7 @@ fi
 # Create project directory
 echo ""
 echo -e "${YELLOW}[6/8] Setting up project directory...${NC}"
-PROJECT_DIR="/home/ubuntu/CC_miniproject"
 
-if [ -d "$PROJECT_DIR" ]; then
-    echo -e "${YELLOW}⚠ Project directory already exists${NC}"
-    read -p "Do you want to remove it and clone fresh? (y/n): " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        rm -rf "$PROJECT_DIR"
-    fi
-fi
 
 # Setup virtual environment for backend
 echo ""
