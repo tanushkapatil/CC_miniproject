@@ -1,0 +1,18 @@
+# Flask Backend Dependencies for Cloud Image Processing Platform
+
+# Flask Web Framework
+flask==2.3.3
+flask-cors==4.0.0
+
+# Image Processing Library
+Pillow
+
+# AWS S3 Storage Integration
+boto3==1.28.25
+
+# MongoDB Database Connector
+pymongo==4.5.0
+
+# Additional helpful libraries
+werkzeug==2.3.7
+python-dotenv==1.0.0

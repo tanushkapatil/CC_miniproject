@@ -1,0 +1,16 @@
+[Unit]
+Description=Cloud Image Processing Platform - Flask Backend
+After=network.target mongodb.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/CC_miniproject/backend
+Environment="PATH=/home/ubuntu/CC_miniproject/backend/venv/bin"
+EnvironmentFile=/home/ubuntu/CC_miniproject/backend/.env
+ExecStart=/home/ubuntu/CC_miniproject/backend/venv/bin/python app.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

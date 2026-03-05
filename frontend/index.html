@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CloudStack - Image Processing Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Background Elements -->
+    <div class="bg-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-content">
+        <div class="nav-brand">
+          <svg
+            class="brand-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19 11H5C3.89543 11 3 11.8954 3 13V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V13C21 11.8954 20.1046 11 19 11Z"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+          </svg>
+          <span class="brand-name">CloudStack</span>
+        </div>
+        <div class="nav-tabs">
+          <button class="nav-tab active" data-tab="upload">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Upload
+          </button>
+          <button class="nav-tab" data-tab="gallery">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M3 9V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V9M3 9V5C3 3.89543 3.89543 3 5 3H8M3 9H21M21 9V5C21 3.89543 20.1046 3 19 3H16M8 3V1M8 3H16M16 3V1"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            Gallery
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-container">
+      <!-- Upload Section -->
+      <section id="uploadSection" class="content-section active">
+        <div class="section-header">
+          <h1 class="section-title">Process Your Images</h1>
+          <p class="section-subtitle">
+            Upload, optimize, and store your images in the cloud with advanced
+            processing options
+          </p>
+        </div>
+
+        <div class="upload-card">
+          <div id="uploadArea" class="upload-area">
+            <input type="file" id="imageInput" accept="image/*" hidden />
+            <div class="upload-placeholder">
+              <div class="upload-icon">
+                <svg
+                  viewBox="0 0 80 80"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="40"
+                    cy="40"
+                    r="38"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    opacity="0.3"
+                  />
+                  <path
+                    d="M40 25V55M25 40H55"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </div>
+              <h3 class="upload-title">Drop your image here</h3>
+              <p class="upload-text">or click to browse</p>
+              <p class="upload-formats">PNG, JPG, GIF, WEBP, BMP (Max 10MB)</p>
+            </div>
+            <div id="imagePreview" class="image-preview hidden">
+              <img id="previewImg" src="" alt="Preview" />
+              <div class="preview-overlay">
+                <button id="removeImage" class="btn-remove">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M18 6L6 18M6 6L18 18"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="preview-info" id="previewInfo"></div>
+            </div>
+          </div>
+
+          <div class="processing-options">
+            <h3 class="options-title">Processing Options</h3>
+
+            <div class="option-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="resizeCheck" checked />
+                <span class="checkbox-custom"></span>
+                <div class="checkbox-content">
+                  <span class="checkbox-title">Resize Image</span>
+                  <span class="checkbox-desc">Optimize dimensions for web</span>
+                </div>
+              </label>
+
+              <div id="resizeOptions" class="sub-options">
+                <div class="input-row">
+                  <div class="input-group">
+                    <label>Width (px)</label>
+                    <input
+                      type="number"
+                      id="widthInput"
+                      value="800"
+                      min="100"
+                      max="4000"
+                    />
+                  </div>
+                  <div class="input-group">
+                    <label>Height (px)</label>
+                    <input
+                      type="number"
+                      id="heightInput"
+                      value="600"
+                      min="100"
+                      max="4000"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="option-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="compressCheck" checked />
+                <span class="checkbox-custom"></span>
+                <div class="checkbox-content">
+                  <span class="checkbox-title">Compress Image</span>
+                  <span class="checkbox-desc"
+                    >Reduce file size while maintaining quality</span
+                  >
+                </div>
+              </label>
+
+              <div id="compressOptions" class="sub-options">
+                <div class="input-group">
+                  <label>Quality: <span id="qualityValue">85</span>%</label>
+                  <input
+                    type="range"
+                    id="qualitySlider"
+                    min="1"
+                    max="100"
+                    value="85"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button id="processBtn" class="btn-primary" disabled>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span>Process Image</span>
+          </button>
+        </div>
+
+        <!-- Processing Modal -->
+        <div id="processingModal" class="modal hidden">
+          <div class="modal-content processing-modal">
+            <div class="processing-animation">
+              <div class="spinner-ring"></div>
+              <svg class="processing-icon" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M19 11H5M5 11L9 7M5 11L9 15"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h3 class="processing-title">Processing Your Image</h3>
+            <p class="processing-text">
+              Optimizing and uploading to cloud storage...
+            </p>
+          </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="modal hidden">
+          <div class="modal-content success-modal">
+            <button class="modal-close" id="closeSuccess">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M18 6L6 18M6 6L18 18"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+            <div class="success-icon">
+              <svg viewBox="0 0 80 80" fill="none">
+                <circle
+                  cx="40"
+                  cy="40"
+                  r="36"
+                  stroke="currentColor"
+                  stroke-width="3"
+                />
+                <path
+                  d="M25 40L35 50L55 30"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h3 class="success-title">Image Processed Successfully!</h3>
+            <div class="result-details" id="resultDetails"></div>
+            <div class="result-actions">
+              <button class="btn-secondary" id="viewGallery">
+                View in Gallery
+              </button>
+              <button class="btn-primary" id="processAnother">
+                Process Another
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery Section -->
+      <section id="gallerySection" class="content-section">
+        <div class="section-header">
+          <h1 class="section-title">Image Gallery</h1>
+          <p class="section-subtitle">
+            Browse all your processed images stored in the cloud
+          </p>
+        </div>
+
+        <div class="gallery-controls">
+          <div class="gallery-stats" id="galleryStats">
+            <span class="stat-label">Total Images:</span>
+            <span class="stat-value" id="totalImages">0</span>
+          </div>
+          <button class="btn-secondary" id="refreshGallery">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Refresh
+          </button>
+        </div>
+
+        <div id="galleryGrid" class="gallery-grid">
+          <div class="gallery-empty">
+            <svg class="empty-icon" viewBox="0 0 100 100" fill="none">
+              <circle
+                cx="50"
+                cy="50"
+                r="45"
+                stroke="currentColor"
+                stroke-width="2"
+                opacity="0.3"
+              />
+              <path
+                d="M35 65L50 45L65 65M40 50L50 35L60 50"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <p class="empty-text">No images yet</p>
+            <p class="empty-subtext">Upload your first image to get started</p>
+          </div>
+        </div>
+
+        <!-- Image Detail Modal -->
+        <div id="imageDetailModal" class="modal hidden">
+          <div class="modal-content image-detail-modal">
+            <button class="modal-close" id="closeDetail">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M18 6L6 18M6 6L18 18"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+            <div class="detail-content" id="detailContent"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Error Toast -->
+    <div id="errorToast" class="toast hidden">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+        <path
+          d="M12 8v4M12 16h.01"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </svg>
+      <span id="errorMessage"></span>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
